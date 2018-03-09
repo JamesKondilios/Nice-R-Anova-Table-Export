@@ -4,8 +4,8 @@ library(grid) # version 3.3.3
 library(gtable) # version 0.2.0
 library(gridExtra) # version 2.2.1
 
-# 'Display_AnovaSummary' takes anova summary object and returns graphical represntation of the table for image export.
-Display_AnovaSummary <- function(model_summary_object, title, title_font_size = 20, footnote = " ", sig_digits =3){
+# 'DisplayAnovaSummary' takes anova summary object and returns graphical represntation of the table for image export.
+DisplayAnovaSummary <- function(model_summary_object, title, title_font_size = 20, footnote = " ", sig_digits =3){
   # Error handling:
   suppressWarnings(if(class(model_summary_object) != "summary.aov"){
     stop("Error: model_summary_object must be of class 'summary.aov' ")
@@ -41,13 +41,5 @@ Display_AnovaSummary <- function(model_summary_object, title, title_font_size = 
   grid.newpage()
   grid.draw(table)
 }
-
-
-# Example implimentation:
-data(mtcars)
-model1 <- summary(aov(mtcars$mpg ~ mtcars$cyl + mtcars$hp + mtcars$drat + mtcars$gear +  mtcars$cyl*mtcars$gear))
-Display_AnovaSummary(model_summary_object = model1, title = "TITLE", title_font_size = 16,footnote = "footnote")
-
-
 
 
