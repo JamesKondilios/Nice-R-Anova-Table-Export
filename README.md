@@ -5,7 +5,7 @@ There's currently no function in R to export an anova summary table as an image.
 ![alt text](https://github.com/JamesKondilios/Nice-R-Anova-Table-Export/blob/master/Example_table.png)
 
 # Example implimentation:
-`data(mtcars)`
-`source("Anova_table_export.R")`
-`model1 <- summary(aov(mtcars$mpg ~ mtcars$cyl + mtcars$hp + mtcars$drat + mtcars$gear +  mtcars$cyl*mtcars$gear))`
-`Display_AnovaSummary(model_summary_object = model1, title = "TITLE", title_font_size = 16,footnote = "footnote")`
+`data(mtcars)`<br />
+`source("Anova_table_export.R")`<br />
+`model1 <- summary(aov(mtcars$mpg ~ mtcars$cyl + mtcars$hp + mtcars$drat + mtcars$gear +  mtcars$cyl*mtcars$gear))`<br />
+`Display_AnovaSummary(model_summary_object = model1, title = "TITLE", title_font_size = 16,footnote = "footnote")`<br />
