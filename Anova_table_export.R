@@ -1,3 +1,6 @@
+# Author: James Kondilios
+# email: u6046902@anu.edu.au
+
 # R version 3.3.3
 library(Hmisc) # install.packages("Hmisc") straight from CRAN. version 4.0-3
 library(grid) # version 3.3.3
