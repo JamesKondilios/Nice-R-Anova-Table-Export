@@ -2,6 +2,13 @@
 # email: u6046902@anu.edu.au / James.Kondilios@anu.edu.au
 
 # R version 3.3.3
+requirements <- c("Hmisc","grid","gtable","gridExtra")
+for(i in requirements){
+  if(as.character(i) %in% rownames(installed.packages()) == FALSE){
+    install.packages(as.character(i))
+  }
+}
+
 library(Hmisc) # install.packages("Hmisc") straight from CRAN. version 4.0-3
 library(grid) # version 3.3.3
 library(gtable) # version 0.2.0
@@ -47,7 +54,3 @@ DisplayAnovaSummary <- function(model_summary_object, title, title_font_size = 2
   grid.newpage()
   grid.draw(table)
 }
-
-model1 <- summary(aov(mtcars$mpg ~ mtcars$cyl + mtcars$hp + mtcars$drat + mtcars$gear + mtcars$cyl*mtcars$gear))
-DisplayAnovaSummary(model_summary_object = model1, title = "TITLE", title_font_size = 16,footnote = "footnote")
-
