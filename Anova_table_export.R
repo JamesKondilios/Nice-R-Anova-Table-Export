@@ -1,5 +1,5 @@
 # Author: James Kondilios
-# email: u6046902@anu.edu.au
+# email: u6046902@anu.edu.au / James.Kondilios@anu.edu.au
 
 # R version 3.3.3
 library(Hmisc) # install.packages("Hmisc") straight from CRAN. version 4.0-3
@@ -8,7 +8,7 @@ library(gtable) # version 0.2.0
 library(gridExtra) # version 2.2.1
 
 # 'DisplayAnovaSummary' takes anova summary object and returns graphical represntation of the table for image export.
-DisplayAnovaSummary <- function(model_summary_object, title, title_font_size = 20, footnote = " ", sig_digits =3){
+DisplayAnovaSummary <- function(model_summary_object, title, title_font_size = 20, footnote = " ", sig_digits =2){
   # Error handling:
   suppressWarnings(if(class(model_summary_object) != "summary.aov"){
     stop("Error: model_summary_object must be of class 'summary.aov' ")
@@ -16,17 +16,20 @@ DisplayAnovaSummary <- function(model_summary_object, title, title_font_size = 2
   # Convert model summary object to data frame
   model_summary <- data.frame(unclass(model_summary_object))
   model_summary <- signif(model_summary,sig_digits) #sig figs
-
+  
   # Add asterisks to significant P-values. (They get removed in conversion to data.frame)
   for(x in 1:(length(model_summary$Pr..F.)-1)){
     if((model_summary$Pr..F.)[x] < 0.001){
-      model_summary$Pr..F.[x]<- paste( model_summary$Pr..F.[x],"***",sep = " ")
+      model_summary$Pr..F.[x]<- paste( formatC(model_summary$Pr..F.[x], format = "e", digits = sig_digits),"***",sep = " ")
     }
     else if((model_summary$Pr..F.)[x] < 0.01){
-      model_summary$Pr..F.[x]<- paste( model_summary$Pr..F.[x],"**",sep = " ")
+      model_summary$Pr..F.[x]<- paste(formatC(model_summary$Pr..F.[x], format = "e", digits = sig_digits),"**",sep = " ")
     }
-    else if((model_summary$Pr..F.)[x] < 0.05){
-      model_summary$Pr..F.[x]<- paste( model_summary$Pr..F.[x],"*",sep = " ")
+    else if((model_summary$Pr..F.)[x] <= 0.05){
+      model_summary$Pr..F.[x]<- paste( formatC(model_summary$Pr..F.[x], format = "e", digits = sig_digits),"*",sep = " ")
+    }
+    else if((model_summary$Pr..F.[x] > 0.05)){
+      model_summary$Pr..F.[x]<- paste( formatC(model_summary$Pr..F.[x], format = "e", digits = sig_digits),"",sep = " ")
     }
   }
   # Fix colnames
@@ -45,4 +48,6 @@ DisplayAnovaSummary <- function(model_summary_object, title, title_font_size = 2
   grid.draw(table)
 }
 
+model1 <- summary(aov(mtcars$mpg ~ mtcars$cyl + mtcars$hp + mtcars$drat + mtcars$gear + mtcars$cyl*mtcars$gear))
+DisplayAnovaSummary(model_summary_object = model1, title = "TITLE", title_font_size = 16,footnote = "footnote")
 
