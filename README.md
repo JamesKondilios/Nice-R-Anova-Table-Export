@@ -1,5 +1,5 @@
 # Nice-R-Anova-Table-Export
-There's currently no function in R to export an anova summary table as an image. Screenshotting the table from the consol looks ugly. This script is an answer to this problem. The 'DisplayAnovaSummary' function takes a summary.aov object and produces a graphical represntation of it. It also adds significance asterisks to the P-value column. Auguments 'title' and 'footnote' can be used to add titles and footnotes to your tables. 
+There's currently no function in R to export an analysis of variance summary table as an image. Screenshotting the table from the consol looks ugly. This script is an answer to this problem. The 'DisplayAnovaSummary' function takes a summary.aov object and produces a graphical represntation of it. It also adds significance asterisks to the P-value column. Auguments 'title' and 'footnote' can be used to add titles and footnotes to your tables. 
 
 ## This is unplesant:
 ![alt text](https://github.com/JamesKondilios/Nice-R-Anova-Table-Export/blob/master/Screen%20Shot%202018-04-23%20at%204.08.39%20pm.png)
